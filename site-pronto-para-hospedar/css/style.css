@@ -34,8 +34,10 @@ h1 span{display:block}h1 .hl{margin-top:.32em;color:var(--go)}
 h2{margin-top:10px;font-size:clamp(1.9rem,8vw,3rem);line-height:1.05;font-weight:800;letter-spacing:-.045em}
 .demo-sec{padding-top:24px}
 @keyframes flash{from{box-shadow:0 0 0 4px var(--soft)}to{box-shadow:0 0 0 0 transparent}}
-.inc{list-style:none;padding:0;margin-top:32px;border-top:1px solid var(--line)}
-.inc li{display:grid;grid-template-columns:40px 1fr;column-gap:14px;padding:22px 0;border-bottom:1px solid var(--line)}
+.inc{list-style:none;padding:0;margin-top:32px;max-width:560px}
+.inc li{--k:0;position:sticky;top:calc(16px + var(--k)*14px);display:grid;grid-template-columns:40px 1fr;column-gap:14px;margin-bottom:20px;padding:22px 20px;border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 18px 34px -24px rgba(16,25,20,.35);transform-origin:50% 0}
+.inc li:nth-child(2){--k:1}.inc li:nth-child(3){--k:2}.inc li:last-child{margin-bottom:0}
+.inc li::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#0E2A19;opacity:var(--dim,0);pointer-events:none}
 .inc svg{grid-row:span 2;width:24px;height:24px;margin-top:2px;stroke:var(--go);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .inc h3{font-size:19px;font-weight:700;letter-spacing:-.02em}.inc p{margin-top:4px;font-size:15px;line-height:1.5;color:var(--mute)}
 .final{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;background:var(--card);padding:32px 22px}
@@ -57,7 +59,7 @@ footer p{max-width:460px;margin:14px auto 0}
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(248,250,249,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
 .sticky .in{max-width:440px;margin:0 auto;display:flex;align-items:center;gap:12px}
 .sticky b{font-size:20px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}.sticky .btn{min-height:48px;font-size:14px}
-@media(min-width:900px){body{padding-bottom:0}.sticky{display:none}section{padding:96px 24px}.top{padding-bottom:88px}.hero{padding-top:88px}.cta{flex-direction:row;max-width:none}.btn{width:auto;min-width:340px}.btn2{min-width:200px}.demo-sec{padding-top:40px}.inc{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;border-top:0}.inc li{display:block;border-bottom:0;border-top:1px solid var(--line);padding:22px 0 0}.inc svg{margin-bottom:14px}.final{padding:56px}}
+@media(min-width:900px){body{padding-bottom:0}.sticky{display:none}section{padding:96px 24px}.top{padding-bottom:88px}.hero{padding-top:88px}.cta{flex-direction:row;max-width:none}.btn{width:auto;min-width:340px}.btn2{min-width:200px}.demo-sec{padding-top:40px}.inc{max-width:640px}.inc li{top:calc(40px + var(--k)*16px);padding:26px 28px}.final{padding:56px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -65,7 +67,6 @@ footer p{max-width:460px;margin:14px auto 0}
 .hero .badge{animation-delay:.05s}.hero h1{animation-delay:.15s}.hero .punch{animation-delay:.3s}.hero .desc{animation-delay:.38s}.hero .pricerow{animation-delay:.46s}.hero .cta{animation-delay:.54s}
 .js .rv{opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1;transform:none}
-.inc li:nth-child(2){transition-delay:.08s}.inc li:nth-child(3){transition-delay:.16s}
 .btn{transition:transform .2s,box-shadow .6s}.btn:active{transform:scale(.98)}
 html[data-done="1"] .btn{box-shadow:0 0 0 5px rgba(34,197,94,.16),0 14px 28px -12px rgba(22,163,74,.7)}
 .flow{position:relative;margin-top:28px;padding-left:48px;max-width:680px}
@@ -194,3 +195,33 @@ figcaption{margin-top:8px;font-size:12px;color:var(--mute)}
 .shots{justify-items:center;grid-template-columns:minmax(0,440px);justify-content:center}.shots figure{width:100%}
 .shot img{height:auto;aspect-ratio:auto}
 @media(min-width:900px){.shots{grid-template-columns:minmax(0,440px)}}
+
+/* ===== Etapa 1 — animações (js/animations.js) ===== */
+/* 2 · revelar palavra por palavra (CSS puro, 70 ms por palavra) */
+.hero h1{animation:none}
+.wd{display:inline-block;font-style:normal;opacity:0;transform:translateY(.4em);animation:wd .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(150ms + var(--i)*70ms)}
+@keyframes wd{to{opacity:1;transform:none}}
+/* 3 · linha que ilumina cada etapa (mesmo motor da demonstração) */
+.nd{transform-box:fill-box;transform-origin:center}
+.nd.lit{filter:drop-shadow(0 0 5px rgba(34,197,94,.65));animation:ndp .6s ease-out}
+@keyframes ndp{40%{transform:scale(1.5)}}
+.js .flow .pn{opacity:.5;transition:border-color .5s,box-shadow .5s,opacity .5s}
+.js .flow .pn.lit{opacity:1}
+/* 4 · texto que se preenche */
+.fill{padding:8px 20px 24px}
+.fillt{max-width:720px;font-size:clamp(1.7rem,7.4vw,3.1rem);line-height:1.08;font-weight:800;letter-spacing:-.045em}
+.fillt span{display:block}
+.fw{font-style:normal;color:var(--go)}.js .fw{color:#C3CDC7}
+/* 5 · luz que segue o mouse (só mouse) */
+.final::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(34,197,94,.2),rgba(34,197,94,.07) 45%,transparent 72%);opacity:0;transition:opacity .45s;pointer-events:none}
+.final.lit::before{opacity:1}
+/* 6 · brilho que atravessa o botão (~0,8 s, depois pausa) */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:42%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-140%) skewX(-18deg);animation:shine 6s ease-in-out infinite;pointer-events:none}
+.sticky .btn::after{animation-delay:2s}.final .btn::after{animation-delay:1s}.btn.off::after{display:none}
+@keyframes shine{0%,84%{transform:translateX(-140%) skewX(-18deg)}98%,100%{transform:translateX(340%) skewX(-18deg)}}
+/* complementar · gradiente vivo discreto no fundo da primeira seção */
+.top::after{inset:-8%;will-change:transform;animation:vivo 16s ease-in-out infinite alternate}
+@keyframes vivo{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(2.5%,2%,0) scale(1.08)}}
+@media(min-width:900px){.fill{padding:24px 24px 48px}}
+@media(prefers-reduced-motion:reduce){.wd{opacity:1;transform:none}.js .fw{color:var(--go)}.js .flow .pn{opacity:1}}

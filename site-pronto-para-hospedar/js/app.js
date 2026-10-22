@@ -157,6 +157,7 @@ function mountDemo(root) {
     if (s === f.last) return;
     const fwd = s > f.last; f.last = s;
     f.spec.apply(f, s);
+    f.cards.forEach((c, i) => tog(c, "lit", f.nodes[i].classList.contains("lit")));
     if (fwd && f === A && canSnd()) sfx.play(f.spec.snd[s], f.el.closest(".mode").id + ":" + s);
     tog(f.bot, "eyes", f.spec.eyes(s)); tog(f.bot, "ok", s === f.spec.fin);
     if (fwd && f.spec.pulse.includes(s)) { f.bot.classList.remove("pl"); void f.bot.offsetWidth; f.bot.classList.add("pl"); }

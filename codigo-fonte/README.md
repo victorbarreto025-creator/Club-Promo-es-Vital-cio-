@@ -40,3 +40,6 @@ Repositório público: **nunca** coloque senhas, tokens, chaves privadas, links 
 ## Publicar (grátis)
 **Cloudflare Pages (recomendado, permite uso comercial):** Workers & Pages → Create → Pages → Connect to Git → escolha este repositório → Framework preset: *None*; Build command: vazio; Build output directory: `/` → Deploy. Depois conecte seu domínio.
 Alternativas: Netlify ou Vercel (mesmo esquema, sem build). Evite GitHub Pages para página de vendas: os termos do GitHub restringem uso comercial.
+
+## Animações (etapa 1)
+`js/animations.js` — cartões que empilham (benefícios), texto que se preenche e luz que segue o mouse (cartão final). Revelar palavras do título, brilho dos botões e gradiente vivo são CSS puro (fim de `css/style.css`). A linha do fluxo do bot continua no motor de `js/app.js`. Tudo respeita `prefers-reduced-motion`.

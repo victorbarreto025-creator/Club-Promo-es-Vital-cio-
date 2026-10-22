@@ -43,3 +43,6 @@ Alternativas: Netlify ou Vercel (mesmo esquema, sem build). Evite GitHub Pages p
 
 ## Animações (etapa 1)
 `js/animations.js` — cartões que empilham (benefícios), texto que se preenche e luz que segue o mouse (cartão final). Revelar palavras do título, brilho dos botões e gradiente vivo são CSS puro (fim de `css/style.css`). A linha do fluxo do bot continua no motor de `js/app.js`. Tudo respeita `prefers-reduced-motion`.
+
+## Robô 3D (etapa 2)
+`js/bot3d.js` — robô verde em Three.js 0.160.0 (import map no `<head>`, geometrias próprias, sem texturas). Trajetória por keyframes ligados às posições reais das seções (array `KF` no topo do arquivo: `d` = desktop, `m` = celular). Se WebGL/CDN falharem ou houver `prefers-reduced-motion`, o site segue sem o robô.

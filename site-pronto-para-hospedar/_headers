@@ -1,0 +1,10 @@
+# Netlify e Cloudflare Pages: cabeçalhos básicos e cache. (Vercel usa vercel.json)
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+/assets/*
+  Cache-Control: public, max-age=86400
+/css/*
+  Cache-Control: public, max-age=3600
+/js/*
+  Cache-Control: public, max-age=3600

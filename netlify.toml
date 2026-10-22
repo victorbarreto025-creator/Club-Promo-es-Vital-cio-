@@ -1,0 +1,3 @@
+# Netlify: publica a pasta pronta (sem build)
+[build]
+  publish = "site-pronto-para-hospedar"
